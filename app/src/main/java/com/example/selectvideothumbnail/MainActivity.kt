@@ -6,10 +6,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.example.selectvideothumbnail.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,20 +22,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var activityForResult: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.goAlbumTV.setOnClickListener {
-            Log.d("KTG", "Click!")
             when {
                 ContextCompat.checkSelfPermission(
                     this,
                     android.Manifest.permission.READ_EXTERNAL_STORAGE
                 ) == PackageManager.PERMISSION_GRANTED -> {
                     val startCustomAlbum = Intent(this, CustomAlbumActivity::class.java)
-                    startActivity(startCustomAlbum)
+                    activityForResult.launch(startCustomAlbum)
+//                    startActivity(startCustomAlbum)
                     //스토리지 읽기 권한이 허용이면 커스텀 앨범 띄워주기
                     //권한 있을 경우 : PERMISSION_GRANTED
                     //권한 없을 경우 : PERMISSION_DENIED
@@ -52,6 +57,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        activityForResult()
+    }
+    private fun activityForResult(){
+        activityForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            if (it.resultCode == RESULT_OK){
+                binding.thumbnailIV.visibility = View.VISIBLE
+                Glide.with(this@MainActivity)
+                    .load(it.data?.getStringExtra("videoData"))
+                    .into(binding.thumbnailIV)
+            }
+        }
     }
 
     private fun showPermissionAlertDialog() {

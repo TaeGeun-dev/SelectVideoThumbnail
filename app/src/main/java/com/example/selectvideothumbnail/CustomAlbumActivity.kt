@@ -1,10 +1,12 @@
 package com.example.selectvideothumbnail
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.database.Cursor
 import android.graphics.Rect
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -103,6 +105,17 @@ class CustomAlbumActivity : AppCompatActivity() {
 
         cursor!!.close()
         customAlbumAdapter.setData(listOfPhotos)
+
+        customAlbumAdapter.setOnItemClickListener(object : CustomAlbumAdapter.OnItemClickListener {
+            override fun onItemClick(v: View, data: ItemGallery) {
+                val intent = Intent(this@CustomAlbumActivity, MainActivity::class.java).apply {
+                    putExtra("videoData",data.mediaData)
+                }
+                setResult(RESULT_OK,intent)
+                finish()
+            }
+
+        })
     }
 
 
