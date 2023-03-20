@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="frames_video_height">60dp</dimen>
+    <dimen name="frames_video_width">38dp</dimen>
+
+    <dimen name="frames_timeline_width">38dp</dimen>
+    <dimen name="frames_timeline_height">68dp</dimen>
+
+    <dimen name="frames_thumbnail_width">256dp</dimen>
+    <dimen name="frames_thumbnail_height">410dp</dimen>
+</resources>

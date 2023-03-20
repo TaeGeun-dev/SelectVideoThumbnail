@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent">
+
+    <LinearLayout
+        android:id="@+id/container_thumbnails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal" />
+
+    <FrameLayout
+        android:id="@+id/container_seek_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/frames_timeline_height"
+        android:layout_gravity="center_vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/thumbsMCV"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/frames_timeline_height"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="28dp"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            app:cardCornerRadius="3dp"
+            app:rippleColor="@android:color/transparent"
+            app:strokeColor="#FD2678"
+            app:strokeWidth="4dp">
+
+            <com.example.selectvideothumbnail.thumbnail.CenterCropVideoView
+                android:id="@+id/view_seek_bar"
+                android:layout_width="@dimen/frames_timeline_width"
+                android:layout_height="@dimen/frames_timeline_height" />
+
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
+
+</merge>

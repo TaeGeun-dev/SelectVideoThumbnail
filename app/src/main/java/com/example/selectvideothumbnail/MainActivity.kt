@@ -15,6 +15,12 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.example.selectvideothumbnail.databinding.ActivityMainBinding
+import com.example.selectvideothumbnail.thumbnail.ThumbyActivity
+import com.example.selectvideothumbnail.thumbnail.ThumbyActivity.Companion.THUMBNAIL_POSITION
+import com.example.selectvideothumbnail.thumbnail.ThumbyActivity.Companion.VIDEO_THUMBNAIL_RESULT_OK
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -23,11 +29,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var activityForResult: ActivityResultLauncher<Intent>
-
+    private var filePath = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.thumbnailCCV.initPlayer()
+
         binding.goAlbumTV.setOnClickListener {
             when {
                 ContextCompat.checkSelfPermission(
@@ -56,17 +64,28 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        binding.selectThumbnailBT.setOnClickListener {
+            activityForResult.launch(
+                ThumbyActivity.getStartIntent(
+                    this@MainActivity,
+                    Uri.parse(filePath),
+                    0
+                )
+            )
+        }
 
         activityForResult()
     }
     private fun activityForResult(){
         activityForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if (it.resultCode == RESULT_OK){
-                binding.thumbnailIV.visibility = View.VISIBLE
                 binding.selectThumbnailBT.visibility = View.VISIBLE
-                Glide.with(this@MainActivity)
-                    .load(it.data?.getStringExtra("videoData"))
-                    .into(binding.thumbnailIV)
+                filePath = it.data?.getStringExtra("videoData")!!
+                binding.thumbnailCCV.setDataSource(this, Uri.parse(filePath), 1)
+
+            } else if (it.resultCode == VIDEO_THUMBNAIL_RESULT_OK){
+                val location: Int = it.data?.getIntExtra(THUMBNAIL_POSITION, 0)!!
+                binding.thumbnailCCV.seekTo(location)
             }
         }
     }

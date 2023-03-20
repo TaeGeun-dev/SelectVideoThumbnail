@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!--타이틀-->
+    <RelativeLayout
+        android:id="@+id/headerRL"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <ImageView
+            android:id="@+id/closeIV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/uploadCV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="6dp"
+            app:cardBackgroundColor="#BABABA"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            app:contentPaddingBottom="6dp"
+            app:contentPaddingLeft="12dp"
+            app:contentPaddingRight="12dp"
+            app:contentPaddingTop="6dp">
+
+            <TextView
+                android:id="@+id/btn_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="선택"
+                android:textColor="#FFFF"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+        </androidx.cardview.widget.CardView>
+
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/thumbsTTL"
+        android:layout_below="@+id/headerRL"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btn_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp">
+
+            <com.example.selectvideothumbnail.thumbnail.CenterCropVideoView
+                android:id="@+id/thumbnailCCV"
+                android:layout_width="@dimen/frames_thumbnail_width"
+                android:layout_height="@dimen/frames_thumbnail_height"
+                android:layout_gravity="center" />
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/test"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            />
+    </LinearLayout>
+
+    <com.example.selectvideothumbnail.thumbnail.ThumbnailTimeline
+        android:id="@+id/thumbsTTL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="28dp" />
+</RelativeLayout>
+</layout>
