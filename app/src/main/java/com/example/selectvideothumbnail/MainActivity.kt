@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         activityForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if (it.resultCode == RESULT_OK){
                 binding.thumbnailIV.visibility = View.VISIBLE
+                binding.selectThumbnailBT.visibility = View.VISIBLE
                 Glide.with(this@MainActivity)
                     .load(it.data?.getStringExtra("videoData"))
                     .into(binding.thumbnailIV)

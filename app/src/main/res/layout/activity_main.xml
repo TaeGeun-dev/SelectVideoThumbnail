@@ -24,6 +24,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="앨범 불러오기"
+            app:layout_constraintBottom_toTopOf="@id/selectThumbnailBT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+         />
+
+        <Button
+            android:id="@+id/selectThumbnailBT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="썸네일 선택하기"
+            android:visibility="gone"
+            app:layout_constraintVertical_bias="0.8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
