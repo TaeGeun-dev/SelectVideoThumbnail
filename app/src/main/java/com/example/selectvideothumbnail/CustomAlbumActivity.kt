@@ -30,6 +30,7 @@ class CustomAlbumActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_customalbum)
         initView()
         initData()
+
     }
 
     private fun initView() {
