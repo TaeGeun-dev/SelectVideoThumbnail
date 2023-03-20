@@ -36,7 +36,6 @@ class CustomAlbumActivity : AppCompatActivity() {
     private fun initView() {
         customAlbumAdapter = CustomAlbumAdapter(listOfPhotos)
         binding.photoRV.adapter = customAlbumAdapter
-
         val spanCount = 3
         val spacing = 20
         val includeEdge = false
